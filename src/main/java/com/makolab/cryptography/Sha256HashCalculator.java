@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import static com.makolab.utils.ByteArrayUtils.ToHexString;
+import static com.makolab.utils.ByteArrayUtils.toHexString;
 
 public class Sha256HashCalculator implements HashCalculator {
     private final String SHA256_NAME = "SHA-256";
@@ -13,12 +13,12 @@ public class Sha256HashCalculator implements HashCalculator {
     @Override
     public String calculateHash(String input) {
         byte[] digest = calculateHashAsBytes(input);
-        return ToHexString(digest);
+        return toHexString(digest);
     }
 
     @Override
     public byte[] calculateHashAsBytes(String input) {
-        MessageDigest digest = null;
+        MessageDigest digest;
         try {
             digest = MessageDigest.getInstance(SHA256_NAME);
         } catch (NoSuchAlgorithmException e) {
