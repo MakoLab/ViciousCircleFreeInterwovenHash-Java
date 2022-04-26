@@ -13,17 +13,16 @@ public class Triple {
         Object = o;
     }
 
-    public String prepareTriple()
-    {
+    public String prepareTriple() {
         var conversionValue = new StringBuilder();
         conversionValue.append('<');
-        conversionValue.append(Subject.Translate(NodeRole.Subject));
+        conversionValue.append(Subject.translate(NodeRole.Subject));
         conversionValue.append('>');
         conversionValue.append('<');
         conversionValue.append(Predicate.toString());
         conversionValue.append('>');
         conversionValue.append('<');
-        conversionValue.append(Object.Translate(NodeRole.Object));
+        conversionValue.append(Object.translate(NodeRole.Object));
         conversionValue.append('>');
         return conversionValue.toString();
     }

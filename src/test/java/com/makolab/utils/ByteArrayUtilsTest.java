@@ -34,16 +34,14 @@ class ByteArrayUtilsTest {
             "6030:96:48",
             "f9aa:-7:-86"
     }, delimiter = ':')
-    public void shouldGiveProperByteArray(String input, int first, int second)
-    {
+    public void shouldGiveProperByteArray(String input, int first, int second) {
         var arr = ByteArrayUtils.toByteArray(input);
         assertEquals(first, arr[0]);
         assertEquals(second, arr[1]);
     }
 
     @Test
-    public void shouldThrowException_NotHexChar()
-    {
+    public void shouldThrowException_NotHexChar() {
         assertThrows(NumberFormatException.class, () -> {
             ByteArrayUtils.toByteArray("6j303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752");
         });
@@ -55,8 +53,7 @@ class ByteArrayUtilsTest {
             "fafafafa:f5f5f5f4",
             "7cd565c5:f9aacb8a"
     }, delimiter = ':')
-    public void shouldAddTwoByteArrays(String addend, String expectedSum)
-    {
+    public void shouldAddTwoByteArrays(String addend, String expectedSum) {
         var arr1 = ByteArrayUtils.toByteArray(addend);
         var arr2 = ByteArrayUtils.toByteArray(addend);
         var sum = ByteArrayUtils.addHashes(arr1, arr2);

@@ -2,8 +2,7 @@ package com.makolab.graphelements;
 
 public class StandardNode extends Node {
     @Override
-    public String Translate(NodeRole role)
-    {
+    public String translate(NodeRole role) {
         var sb = new StringBuilder();
         sb.append("grounded_node::role:");
         sb.append(role == NodeRole.Subject ? "S" : "O");

@@ -6,7 +6,7 @@ public class BlankNode extends Node {
     }
 
     @Override
-    public String Translate(NodeRole role) {
+    public String translate(NodeRole role) {
         var sb = new StringBuilder();
         sb.append("blvl:");
         sb.append(StructureLevel);
