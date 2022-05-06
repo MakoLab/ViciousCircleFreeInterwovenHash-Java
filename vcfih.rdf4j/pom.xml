@@ -9,28 +9,18 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <packaging>jar</packaging>
-    <artifactId>vicious-circle-free-interwoven-hash</artifactId>
+    <artifactId>vcfih-rdf4j</artifactId>
 
     <dependencies>
-
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.javatuples</groupId>
-            <artifactId>javatuples</artifactId>
-            <scope>compile</scope>
+            <groupId>com.makolab</groupId>
+            <artifactId>vicious-circle-free-interwoven-hash</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.rdf4j</groupId>
-            <artifactId>rdf4j-model-api</artifactId>
+            <artifactId>rdf4j-model</artifactId>
             <version>4.0.0</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
-
 </project>

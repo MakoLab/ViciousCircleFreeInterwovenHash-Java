@@ -2,22 +2,22 @@ package com.makolab.graphelements;
 
 public class BlankNode extends Node {
     public BlankNode(String identifier) {
-        Identifier = identifier;
+        this.identifier = identifier;
     }
 
     @Override
     public String translate(NodeRole role) {
         var sb = new StringBuilder();
         sb.append("blvl:");
-        sb.append(StructureLevel);
+        sb.append(structureLevel);
         sb.append("::bind:");
-        sb.append(BlankInDegree);
+        sb.append(blankInDegree);
         sb.append("::ind:");
-        sb.append(InDegree);
+        sb.append(inDegree);
         sb.append("::boud:");
-        sb.append(BlankOutDegree);
+        sb.append(blankOutDegree);
         sb.append(":outd:");
-        sb.append(OutDegree);
+        sb.append(outDegree);
         sb.append("::role:");
         sb.append(role == NodeRole.Subject ? "Sblank" : "Oblank");
         return sb.toString();

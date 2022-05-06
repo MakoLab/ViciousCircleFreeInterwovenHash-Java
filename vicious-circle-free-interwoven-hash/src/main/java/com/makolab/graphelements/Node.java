@@ -6,124 +6,123 @@ import org.javatuples.Pair;
 import org.javatuples.Septet;
 import org.javatuples.Sextet;
 
-import javax.naming.OperationNotSupportedException;
 import java.net.URI;
 import java.util.*;
 
 public abstract class Node {
-    String Identifier;
-    HashMap<String, List<URI>> IncomingIris = new HashMap<>();
-    HashMap<String, List<URI>> IncomingBlanks = new HashMap<>();
-    int InDegree;
-    int OutDegree;
-    HashMap<String, List<URI>> IriNeighbours = new HashMap<>();
-    HashMap<String, List<URI>> BlankNeighbours = new HashMap<>();
-    int BlankInDegree;
-    int BlankOutDegree;
-    int TempDegree;
-    int StructureNumber;
-    int StructureLevel;
+    String identifier;
+    HashMap<String, List<URI>> incomingIris = new HashMap<>();
+    HashMap<String, List<URI>> incomingBlanks = new HashMap<>();
+    int inDegree;
+    int outDegree;
+    HashMap<String, List<URI>> iriNeighbours = new HashMap<>();
+    HashMap<String, List<URI>> blankNeighbours = new HashMap<>();
+    int blankInDegree;
+    int blankOutDegree;
+    int tempDegree;
+    int structureNumber;
+    int structureLevel;
 
     //region Getters and Setters
     public String getIdentifier() {
-        return Identifier;
+        return identifier;
     }
 
     public void setIdentifier(String identifier) {
-        Identifier = identifier;
+        this.identifier = identifier;
     }
 
     public HashMap<String, List<URI>> getIncomingIris() {
-        return IncomingIris;
+        return incomingIris;
     }
 
     public void setIncomingIris(HashMap<String, List<URI>> incomingIris) {
-        IncomingIris = incomingIris;
+        this.incomingIris = incomingIris;
     }
 
     public HashMap<String, List<URI>> getIncomingBlanks() {
-        return IncomingBlanks;
+        return incomingBlanks;
     }
 
     public void setIncomingBlanks(HashMap<String, List<URI>> incomingBlanks) {
-        IncomingBlanks = incomingBlanks;
+        this.incomingBlanks = incomingBlanks;
     }
 
     public int getInDegree() {
-        return InDegree;
+        return inDegree;
     }
 
     public void setInDegree(int inDegree) {
-        InDegree = inDegree;
+        this.inDegree = inDegree;
     }
 
     public int getOutDegree() {
-        return OutDegree;
+        return outDegree;
     }
 
     public void setOutDegree(int outDegree) {
-        OutDegree = outDegree;
+        this.outDegree = outDegree;
     }
 
     public HashMap<String, List<URI>> getIriNeighbours() {
-        return IriNeighbours;
+        return iriNeighbours;
     }
 
     public void setIriNeighbours(HashMap<String, List<URI>> iriNeighbours) {
-        IriNeighbours = iriNeighbours;
+        this.iriNeighbours = iriNeighbours;
     }
 
     public HashMap<String, List<URI>> getBlankNeighbours() {
-        return BlankNeighbours;
+        return blankNeighbours;
     }
 
     public void setBlankNeighbours(HashMap<String, List<URI>> blankNeighbours) {
-        BlankNeighbours = blankNeighbours;
+        this.blankNeighbours = blankNeighbours;
     }
 
     public int getBlankInDegree() {
-        return BlankInDegree;
+        return blankInDegree;
     }
 
     public void setBlankInDegree(int blankInDegree) {
-        BlankInDegree = blankInDegree;
+        this.blankInDegree = blankInDegree;
     }
 
     public int getBlankOutDegree() {
-        return BlankOutDegree;
+        return blankOutDegree;
     }
 
     public void setBlankOutDegree(int blankOutDegree) {
-        BlankOutDegree = blankOutDegree;
+        this.blankOutDegree = blankOutDegree;
     }
 
     public int getTempDegree() {
-        return TempDegree;
+        return tempDegree;
     }
 
     public void setTempDegree(int tempDegree) {
-        TempDegree = tempDegree;
+        this.tempDegree = tempDegree;
     }
 
     public int getStructureNumber() {
-        return StructureNumber;
+        return structureNumber;
     }
 
     public void setStructureNumber(int structureNumber) {
-        StructureNumber = structureNumber;
+        this.structureNumber = structureNumber;
     }
 
     public int getStructureLevel() {
-        return StructureLevel;
+        return structureLevel;
     }
 
     public void setStructureLevel(int structureLevel) {
-        StructureLevel = structureLevel;
+        this.structureLevel = structureLevel;
     }
     //endregion
 
     Node() {
-        Identifier = "";
+        identifier = "";
     }
 
     public boolean isBlank() {
@@ -131,41 +130,41 @@ public abstract class Node {
     }
 
     void addBlankNeighbour(Node object, URI predicate) {
-        if (BlankNeighbours.containsKey(object.Identifier)) {
-            BlankNeighbours.get(object.Identifier).add(predicate);
+        if (blankNeighbours.containsKey(object.identifier)) {
+            blankNeighbours.get(object.identifier).add(predicate);
         } else {
-            BlankNeighbours.put(object.Identifier, new ArrayList<>(List.of(predicate)));
+            blankNeighbours.put(object.identifier, new ArrayList<>(List.of(predicate)));
         }
-        BlankOutDegree++;
-        OutDegree++;
+        blankOutDegree++;
+        outDegree++;
     }
 
     void addRealNeighbour(Node object, URI predicate) {
-        if (IriNeighbours.containsKey(object.Identifier)) {
-            IriNeighbours.get(object.Identifier).add(predicate);
+        if (iriNeighbours.containsKey(object.identifier)) {
+            iriNeighbours.get(object.identifier).add(predicate);
         } else {
-            IriNeighbours.put(object.Identifier, new ArrayList<>(List.of(predicate)));
+            iriNeighbours.put(object.identifier, new ArrayList<>(List.of(predicate)));
         }
-        OutDegree++;
+        outDegree++;
     }
 
     void addIncomingBlank(Node subject, URI predicate) {
-        if (IncomingBlanks.containsKey(subject.Identifier)) {
-            IncomingBlanks.get(subject.Identifier).add(predicate);
+        if (incomingBlanks.containsKey(subject.identifier)) {
+            incomingBlanks.get(subject.identifier).add(predicate);
         } else {
-            IncomingBlanks.put(subject.Identifier, new ArrayList<>(List.of(predicate)));
+            incomingBlanks.put(subject.identifier, new ArrayList<>(List.of(predicate)));
         }
-        BlankInDegree++;
-        InDegree++;
+        blankInDegree++;
+        inDegree++;
     }
 
     void addIncomingReal(Node subject, URI predicate) {
-        if (IncomingIris.containsKey(subject.Identifier)) {
-            IncomingIris.get(subject.Identifier).add(predicate);
+        if (incomingIris.containsKey(subject.identifier)) {
+            incomingIris.get(subject.identifier).add(predicate);
         } else {
-            IncomingIris.put(subject.Identifier, new ArrayList<>(List.of(predicate)));
+            incomingIris.put(subject.identifier, new ArrayList<>(List.of(predicate)));
         }
-        InDegree++;
+        inDegree++;
     }
 
     Sextet<String, Integer, Integer, Integer, Integer, String> generateRealPriorityTuple(String predicate) {
@@ -175,7 +174,7 @@ public abstract class Node {
         if (this instanceof BlankNode) {
             throw new IllegalArgumentException("This is method cannot be executed on a blank node object");
         }
-        return new Sextet<>(Identifier, BlankInDegree, InDegree, BlankOutDegree, OutDegree, predicate);
+        return new Sextet<>(identifier, blankInDegree, inDegree, blankOutDegree, outDegree, predicate);
     }
 
     Sextet<Integer, Integer, Integer, Integer, Integer, String> generateBlankPriorityTuple(String predicate) {
@@ -185,7 +184,7 @@ public abstract class Node {
         if (!(this instanceof BlankNode)) {
             throw new IllegalArgumentException("This is method cannot be executed on a real node object");
         }
-        return new Sextet<>(StructureLevel, BlankInDegree, InDegree, BlankOutDegree, OutDegree, predicate);
+        return new Sextet<>(structureLevel, blankInDegree, inDegree, blankOutDegree, outDegree, predicate);
     }
 
     Septet<Integer, Integer, Integer, Integer, Integer, String, String> generateBlankInterwovenPriorityTuple(Graph g, String predicate) {

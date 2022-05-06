@@ -10,60 +10,60 @@ import java.util.*;
 
 public class Graph {
     private HashCalculator defaultHashCalculator = new Sha256HashCalculator();
-    List<Triple> Triples = new ArrayList<>();
-    HashMap<String, BlankNode> BlankNodes = new HashMap<String, BlankNode>();
-    HashMap<String, StandardNode> StandardNodes = new HashMap<String, StandardNode>();
-    HashMap<String, List<String>> WeaklyCC;
-    HashMap<Integer, byte[]> ComponentHashValue = new HashMap<Integer, byte[]>();
-    public byte[] HashValue;
+    List<Triple> triples = new ArrayList<>();
+    HashMap<String, BlankNode> blankNodes = new HashMap<String, BlankNode>();
+    HashMap<String, StandardNode> standardNodes = new HashMap<String, StandardNode>();
+    HashMap<String, List<String>> weaklyCC;
+    HashMap<Integer, byte[]> componentHashValue = new HashMap<Integer, byte[]>();
+    public byte[] hashValue;
 
     //region Getters and Setters
     public List<Triple> getTriples() {
-        return Triples;
+        return triples;
     }
 
     public void setTriples(List<Triple> triples) {
-        Triples = triples;
+        this.triples = triples;
     }
 
     public HashMap<String, BlankNode> getBlankNodes() {
-        return BlankNodes;
+        return blankNodes;
     }
 
     public void setBlankNodes(HashMap<String, BlankNode> blankNodes) {
-        BlankNodes = blankNodes;
+        this.blankNodes = blankNodes;
     }
 
     public HashMap<String, StandardNode> getStandardNodes() {
-        return StandardNodes;
+        return standardNodes;
     }
 
     public void setStandardNodes(HashMap<String, StandardNode> standardNodes) {
-        StandardNodes = standardNodes;
+        this.standardNodes = standardNodes;
     }
 
     public HashMap<String, List<String>> getWeaklyCC() {
-        return WeaklyCC;
+        return weaklyCC;
     }
 
     public void setWeaklyCC(HashMap<String, List<String>> weaklyCC) {
-        WeaklyCC = weaklyCC;
+        this.weaklyCC = weaklyCC;
     }
 
     public HashMap<Integer, byte[]> getComponentHashValue() {
-        return ComponentHashValue;
+        return componentHashValue;
     }
 
     public void setComponentHashValue(HashMap<Integer, byte[]> componentHashValue) {
-        ComponentHashValue = componentHashValue;
+        this.componentHashValue = componentHashValue;
     }
 
     public byte[] getHashValue() {
-        return HashValue;
+        return hashValue;
     }
 
     public void setHashValue(byte[] hashValue) {
-        HashValue = hashValue;
+        this.hashValue = hashValue;
     }
     //endregion
 
@@ -75,19 +75,19 @@ public class Graph {
     public byte[] calculateHash(HashCalculator hashCalculator)
     {
         var hashValueForGraph = new byte[hashCalculator.getHashSize() / 8];
-        WeaklyCC = treeMarking();
-        for (var component : WeaklyCC.keySet())
+        weaklyCC = treeMarking();
+        for (var component : weaklyCC.keySet())
         {
-            var leadNode = WeaklyCC.get(component).get(0);
-            prepareSingleComponent(WeaklyCC.get(component), true);
-            var q = hashCalculator.calculateHashAsBytes(prepareSingleComponent(WeaklyCC.get(component), false));
-            ComponentHashValue.put(BlankNodes.get(leadNode).StructureNumber, q);
+            var leadNode = weaklyCC.get(component).get(0);
+            prepareSingleComponent(weaklyCC.get(component), true);
+            var q = hashCalculator.calculateHashAsBytes(prepareSingleComponent(weaklyCC.get(component), false));
+            componentHashValue.put(blankNodes.get(leadNode).structureNumber, q);
             hashValueForGraph = ByteArrayUtils.addHashes(hashValueForGraph, q);
         }
 
-        for (var t : Triples)
+        for (var t : triples)
         {
-            if (t.Subject.isBlank() && t.Object.isBlank())
+            if (t.subject.isBlank() && t.object.isBlank())
                 continue;
             else
             {
@@ -95,51 +95,51 @@ public class Graph {
                 hashValueForGraph = ByteArrayUtils.addHashes(hashValueForGraph, q);
             }
         }
-        HashValue = hashValueForGraph;
-        return HashValue;
+        hashValue = hashValueForGraph;
+        return hashValue;
     }
 
     public boolean containsBlankNode(BlankNode bn) {
-        return BlankNodes.containsKey(bn.Identifier);
+        return blankNodes.containsKey(bn.identifier);
     }
     public boolean containsIriNode(StandardNode iNode) {
-        return StandardNodes.containsKey(iNode.Identifier);
+        return standardNodes.containsKey(iNode.identifier);
     }
 
     public void addTriple(Node s, URI p, Node o)
     {
         if (s instanceof BlankNode)
         {
-            if (!BlankNodes.containsKey(s.Identifier))
+            if (!blankNodes.containsKey(s.identifier))
             {
-                BlankNodes.put(s.Identifier, (BlankNode)s);
+                blankNodes.put(s.identifier, (BlankNode)s);
             }
-            s = BlankNodes.get(s.Identifier);
+            s = blankNodes.get(s.identifier);
         }
             else
         {
-            if (!StandardNodes.containsKey(s.Identifier))
+            if (!standardNodes.containsKey(s.identifier))
             {
-                StandardNodes.put(s.Identifier, (StandardNode)s);
+                standardNodes.put(s.identifier, (StandardNode)s);
             }
-            s = StandardNodes.get(s.Identifier);
+            s = standardNodes.get(s.identifier);
         }
 
         if (o instanceof BlankNode)
         {
-            if (!BlankNodes.containsKey(o.Identifier))
+            if (!blankNodes.containsKey(o.identifier))
             {
-                BlankNodes.put(o.Identifier, (BlankNode)o);
+                blankNodes.put(o.identifier, (BlankNode)o);
             }
-            o = BlankNodes.get(o.Identifier);
+            o = blankNodes.get(o.identifier);
         }
             else
         {
-            if (!StandardNodes.containsKey(o.Identifier))
+            if (!standardNodes.containsKey(o.identifier))
             {
-                StandardNodes.put(o.Identifier, (StandardNode)o);
+                standardNodes.put(o.identifier, (StandardNode)o);
             }
-            o = StandardNodes.get(o.Identifier);
+            o = standardNodes.get(o.identifier);
         }
 
         if (s instanceof BlankNode)
@@ -160,7 +160,7 @@ public class Graph {
             s.addRealNeighbour(o, p);
         }
 
-        Triples.add(new Triple(s, p, o));
+        triples.add(new Triple(s, p, o));
     }
 
     public boolean cycleDetection()
@@ -170,11 +170,11 @@ public class Graph {
         var visited = new ArrayList<BlankNode>();
         for (var neighbour : bg.values())
         {
-            neighbour.TempDegree = neighbour.BlankInDegree;
+            neighbour.tempDegree = neighbour.blankInDegree;
         }
         for (var node : bg.values())
         {
-            if (node.BlankInDegree == 0)
+            if (node.blankInDegree == 0)
             {
                 queue.add(node);
             }
@@ -182,10 +182,10 @@ public class Graph {
         while (queue.size() > 0)
         {
             var node = queue.poll();
-            for (var neighbour : node.BlankNeighbours.keySet())
+            for (var neighbour : node.blankNeighbours.keySet())
             {
-                bg.get(neighbour).TempDegree -= node.BlankNeighbours.get(neighbour).size();
-                if (bg.get(neighbour).TempDegree == 0)
+                bg.get(neighbour).tempDegree -= node.blankNeighbours.get(neighbour).size();
+                if (bg.get(neighbour).tempDegree == 0)
                 {
                     queue.add(bg.get(neighbour));
                 }
@@ -198,16 +198,16 @@ public class Graph {
     public HashMap<String, List<String>> treeMarking()
     {
         HashMap<String, String> parent = new HashMap<>();
-        for (var e : BlankNodes.keySet())
+        for (var e : blankNodes.keySet())
         {
             parent.put(e, e);
         }
         ArrayList<String[]> edges = new ArrayList<>();
-        for (var e : BlankNodes.values())
+        for (var e : blankNodes.values())
         {
-            for (var n : e.BlankNeighbours.keySet())
+            for (var n : e.blankNeighbours.keySet())
             {
-                edges.add(new String[] { e.Identifier, n });
+                edges.add(new String[] { e.identifier, n });
             }
         }
         for (var e : edges)
@@ -243,7 +243,7 @@ public class Graph {
         {
             for (var n : result.get(r))
             {
-                BlankNodes.get(n).StructureNumber = i;
+                blankNodes.get(n).structureNumber = i;
             }
             i++;
         }
@@ -257,11 +257,11 @@ public class Graph {
         var priorityQueue = new PriorityQueue<BlankInterwovenPriorityQueueElement>();
         for (var node : component)
         {
-            BlankNodes.get(node).TempDegree = BlankNodes.get(node).BlankInDegree;
-            if (BlankNodes.get(node).BlankInDegree == 0)
+            blankNodes.get(node).tempDegree = blankNodes.get(node).blankInDegree;
+            if (blankNodes.get(node).blankInDegree == 0)
             {
-                priorityQueue.add(new BlankInterwovenPriorityQueueElement(BlankNodes.get(node), BlankNodes.get(node).generateBlankInterwovenPriorityTuple(this, null)));
-                BlankNodes.get(node).StructureLevel = 0;
+                priorityQueue.add(new BlankInterwovenPriorityQueueElement(blankNodes.get(node), blankNodes.get(node).generateBlankInterwovenPriorityTuple(this, null)));
+                blankNodes.get(node).structureLevel = 0;
             }
         }
         while (priorityQueue.size() > 0)
@@ -273,14 +273,14 @@ public class Graph {
             if (!preparing)
             {
                 var miniqueue1 = new PriorityQueue<BlankInterwovenPriorityQueueElement>();
-                for (var neighbour : node.getValue().BlankNeighbours.keySet())
+                for (var neighbour : node.getValue().blankNeighbours.keySet())
                 {
-                    miniqueue1.add(new BlankInterwovenPriorityQueueElement(BlankNodes.get(neighbour), BlankNodes.get(neighbour).generateBlankInterwovenPriorityTuple(this, null)));
+                    miniqueue1.add(new BlankInterwovenPriorityQueueElement(blankNodes.get(neighbour), blankNodes.get(neighbour).generateBlankInterwovenPriorityTuple(this, null)));
                 }
                 while (miniqueue1.size() > 0)
                 {
                     var neigh = miniqueue1.poll();
-                    var sorted = node.getValue().BlankNeighbours.get(neigh.getValue().Identifier); //ToDo: add sorting
+                    var sorted = node.getValue().blankNeighbours.get(neigh.getValue().identifier); //ToDo: add sorting
                     for (var predicate : sorted)
                     {
                         valueForComponent += new Triple(node.getValue(), predicate, neigh.getValue()).prepareTriple();
@@ -290,16 +290,16 @@ public class Graph {
 
             // Proceed with handling subsequent parts of our DAG.
 
-            for (var neighbour : node.getValue().BlankNeighbours.keySet())
+            for (var neighbour : node.getValue().blankNeighbours.keySet())
             {
-                BlankNodes.get(neighbour).TempDegree -= node.getValue().BlankNeighbours.get(neighbour).size();
-                if (BlankNodes.get(neighbour).TempDegree == 0)
+                blankNodes.get(neighbour).tempDegree -= node.getValue().blankNeighbours.get(neighbour).size();
+                if (blankNodes.get(neighbour).tempDegree == 0)
                 {
                     if (preparing)
                     {
-                        BlankNodes.get(neighbour).StructureLevel = node.getValue().StructureLevel + 1;
+                        blankNodes.get(neighbour).structureLevel = node.getValue().structureLevel + 1;
                     }
-                    priorityQueue.add(new BlankInterwovenPriorityQueueElement(BlankNodes.get(neighbour), BlankNodes.get(neighbour).generateBlankInterwovenPriorityTuple(this, null)));
+                    priorityQueue.add(new BlankInterwovenPriorityQueueElement(blankNodes.get(neighbour), blankNodes.get(neighbour).generateBlankInterwovenPriorityTuple(this, null)));
                 }
             }
         }
@@ -308,7 +308,7 @@ public class Graph {
 
     public HashMap<String, BlankNode> copyBlanks()
     {
-        return new HashMap<>(BlankNodes);
+        return new HashMap<>(blankNodes);
     }
 
     private static String merge(HashMap<String, String> parent, String x)

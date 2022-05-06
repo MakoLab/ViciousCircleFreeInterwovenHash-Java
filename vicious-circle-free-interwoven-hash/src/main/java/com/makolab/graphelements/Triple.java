@@ -3,26 +3,26 @@ package com.makolab.graphelements;
 import java.net.URI;
 
 public class Triple {
-    public Node Subject;
-    public URI Predicate;
-    public Node Object;
+    public Node subject;
+    public URI predicate;
+    public Node object;
 
     public Triple(Node s, URI p, Node o) {
-        Subject = s;
-        Predicate = p;
-        Object = o;
+        subject = s;
+        predicate = p;
+        object = o;
     }
 
     public String prepareTriple() {
         var conversionValue = new StringBuilder();
         conversionValue.append('<');
-        conversionValue.append(Subject.translate(NodeRole.Subject));
+        conversionValue.append(subject.translate(NodeRole.Subject));
         conversionValue.append('>');
         conversionValue.append('<');
-        conversionValue.append(Predicate.toString());
+        conversionValue.append(predicate.toString());
         conversionValue.append('>');
         conversionValue.append('<');
-        conversionValue.append(Object.translate(NodeRole.Object));
+        conversionValue.append(object.translate(NodeRole.Object));
         conversionValue.append('>');
         return conversionValue.toString();
     }

@@ -7,7 +7,7 @@ public class StandardNode extends Node {
         sb.append("grounded_node::role:");
         sb.append(role == NodeRole.Subject ? "S" : "O");
         sb.append("::name:");
-        sb.append(Identifier);
+        sb.append(identifier);
         return sb.toString();
     }
 }
