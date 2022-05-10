@@ -11,7 +11,7 @@
     <modules>
         <module>vicious-circle-free-interwoven-hash</module>
         <module>console-app</module>
-        <module>vcfih.rdf4j</module>
+        <module>vcfih-rdf4j</module>
     </modules>
 
     <properties>

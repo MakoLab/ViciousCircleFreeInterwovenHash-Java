@@ -1,3 +1,5 @@
+package com.makolab.rdf4jreader;
+
 import com.makolab.graphelements.*;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
@@ -6,7 +8,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class Rdf4jReader {
-    public static Graph readGraph(Model g) throws URISyntaxException {
+    public static Graph readGraph(Model g) {
         var graph = new Graph();
         for (var statement : g) {
             Node s;
@@ -26,12 +28,17 @@ public class Rdf4jReader {
                 o = new IriNode(statement.getObject().stringValue());
             } else if (statement.getObject().isLiteral()) {
                 var l = (Literal)statement.getObject();
-                o = new LiteralNode(l.getLabel(), l.getDatatype(), l.getLanguage());
+                var lang = l.getLanguage().orElse(null);
+                o = new LiteralNode(l.getLabel(), l.getDatatype().stringValue(), lang);
             }
             else {
                 throw new IllegalArgumentException("Unknown node type");
             }
-            graph.addTriple(s, new URI(statement.getPredicate().stringValue()), o);
+            try {
+                graph.addTriple(s, new URI(statement.getPredicate().stringValue()), o);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
         }
         return graph;
     }
