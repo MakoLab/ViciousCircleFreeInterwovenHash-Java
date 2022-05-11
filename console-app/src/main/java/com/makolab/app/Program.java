@@ -9,7 +9,7 @@ import java.io.*;
 
 public class Program {
     public static void main(String[] args) {
-        try (InputStream is = Program.class.getResourceAsStream("rdf/rdf1.ttl")) {
+        try (InputStream is = Program.class.getResourceAsStream("/rdf/rdf1.ttl")) {
             var g = Rio.parse(is, RDFFormat.TURTLE);
             var ig = Rdf4jReader.readGraph(g);
             var hash = ig.calculateHash();
