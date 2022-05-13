@@ -11,7 +11,6 @@ import java.security.NoSuchAlgorithmException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ByteArrayUtilsTest {
-
     @ParameterizedTest
     @CsvSource(value = {
             "test1:1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014",
