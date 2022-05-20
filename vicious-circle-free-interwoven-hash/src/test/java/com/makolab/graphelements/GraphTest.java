@@ -2,6 +2,8 @@ package com.makolab.graphelements;
 
 import com.makolab.utils.ByteArrayUtils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -20,4 +22,6 @@ class GraphTest {
         var h2 = ByteArrayUtils.toHexString(g2.calculateHash());
         assertEquals(h1, h2);
     }
+
+
 }

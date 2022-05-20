@@ -1,0 +1,44 @@
+@prefix lei: <http://lei.info/voc/l1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://lei.info/0292001376F6T9DHG583> a lei:LegalEntity ;
+    lei:alternativeLanguageEntityName "SPRINGBOARD TRUST AND INVESTMENT LTD"@fr ;
+    lei:alternativeLanguageHeadquartersAddress [ a lei:Address ;
+            lei:city "LAGOS"@fr ;
+            lei:country "NG"@fr ;
+            lei:postalCode "23401"@fr ;
+            lei:region "NG-LA"@fr ;
+            lei:streetAddress "28 OLOGUN AGBAJE STREET"@fr ] ;
+    lei:entityLegalFormCode "8888" ;
+    lei:headquartersAddress [ a lei:Address ;
+            lei:city "LAGOS" ;
+            lei:country "NG" ;
+            lei:region "NG-LA" ;
+            lei:streetAddress "28 OLOGUN AGBAJE STREET" ] ;
+    lei:identifiedBy <http://lei.info/0292001376F6T9DHG583#lei> ;
+    lei:legalAddress [ a lei:Address ;
+            lei:city "LAGOS" ;
+            lei:country "NG" ;
+            lei:postalCode "23401" ;
+            lei:region "NG-LA" ;
+            lei:streetAddress "28 OLOGUN AGBAJE STREET" ] ;
+    lei:legalEntityStatus lei:Active ;
+    lei:legalName "SPRINGBSPRINGBOARD TRUST AND INVESTMENT LTD"@en ;
+    lei:primaryValidationAuthority [ a lei:ValidationAuthority ;
+            lei:validationAuthorityID "RA000469" ] ;
+    lei:registrationAuthority [ a lei:RegistrationAuthority ;
+            lei:registrationAuthorityEntityID "RC382989" ;
+            lei:registrationAuthorityID "RA000469" ] ;
+    lei:validationSource lei:FullyCorroborated .
+
+<http://lei.info/0292001376F6T9DHG583#lei> a lei:LegalEntityIdentifier ;
+    lei:identifies <http://lei.info/0292001376F6T9DHG583> ;
+    lei:initialRegistrationDate "2016-06-21T12:30:00+00:00"^^xsd:dateTime ;
+    lei:lastUpdateDate "2018-06-22T11:44:56+00:00"^^xsd:dateTime ;
+    lei:leiCode "0292001376F6T9DHG583" ;
+    lei:managingLOU <http://lei.info/029200067A7K6CH0H586> ;
+    lei:nextRenewalDate "2019-06-21T11:30:00+00:00"^^xsd:dateTime ;
+    lei:registrationStatus lei:Issued .

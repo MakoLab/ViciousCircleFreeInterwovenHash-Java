@@ -13,9 +13,20 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.makolab</groupId>
             <artifactId>vicious-circle-free-interwoven-hash</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.rdf4j</groupId>
+            <artifactId>rdf4j-rio-turtle</artifactId>
+            <version>4.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.rdf4j</groupId>

@@ -24,9 +24,6 @@ public class LiteralNode extends StandardNode {
                 throw new RuntimeException(e);
             }
         }
-        if (datatype != null && lang != null) {
-            throw new IllegalArgumentException("Datatype and language cannot be present at the same time.");
-        }
         if (datatype != null) {
             switch (datatype) {
                 case "http://www.w3.org/2001/XMLSchema#dateTime":
@@ -40,15 +37,19 @@ public class LiteralNode extends StandardNode {
                     break;
                 case "http://www.w3.org/2001/XMLSchema#string":
                     datatype = "";
-                default:
-                    value = Normalizer.normalize(value.replaceAll("\\p{C}", ""), Normalizer.Form.NFC);
             }
-            value = escapeN3(value) + datatype;
         }
-        if (lang != null) {
-            value = escapeN3(value) + "@" + lang;
+        value = Normalizer.normalize(value.replaceAll("\\p{C}", ""), Normalizer.Form.NFC);
+        value = escapeN3(value);
+        if (lang != null && !lang.isBlank()) {
+            value = value + lang;
         }
-        identifier = ByteArrayUtils.toHexString(digest.digest(identifier.getBytes(StandardCharsets.UTF_8)));
+        else {
+            if (datatype != null && !datatype.isBlank()) {
+                value = value + datatype;
+            }
+        }
+        identifier = ByteArrayUtils.toHexString(digest.digest(value.getBytes(StandardCharsets.UTF_8)));
     }
 
     private String escapeN3(String s) {

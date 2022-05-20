@@ -1,6 +1,6 @@
 package com.makolab.graphelements;
 
-public class StandardNode extends Node {
+public abstract class StandardNode extends Node {
     @Override
     public String translate(NodeRole role) {
         var sb = new StringBuilder();

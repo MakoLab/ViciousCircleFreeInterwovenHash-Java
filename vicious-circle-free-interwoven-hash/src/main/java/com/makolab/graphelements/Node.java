@@ -218,7 +218,7 @@ public abstract class Node {
             }
         }
         while (miniqueue2.size() > 0) {
-            var edge = miniqueue1.poll();
+            var edge = miniqueue2.poll();
             neighbours += new Triple(edge.getValue().getValue0(), edge.getValue().getValue1(), this).prepareTriple();
         }
 
@@ -231,7 +231,7 @@ public abstract class Node {
             }
         }
         while (miniqueue3.size() > 0) {
-            var edge = miniqueue1.poll();
+            var edge = miniqueue3.poll();
             neighbours += new Triple(edge.getValue().getValue0(), edge.getValue().getValue1(), this).prepareTriple();
         }
 
@@ -244,7 +244,7 @@ public abstract class Node {
             }
         }
         while (miniqueue4.size() > 0) {
-            var edge = miniqueue1.poll();
+            var edge = miniqueue4.poll();
             neighbours += new Triple(edge.getValue().getValue0(), edge.getValue().getValue1(), this).prepareTriple();
         }
 

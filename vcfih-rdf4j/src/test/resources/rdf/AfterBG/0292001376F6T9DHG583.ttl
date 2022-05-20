@@ -1,0 +1,43 @@
+@base <graph://0292001376f6t9dhg583/>.
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+<http://lei.info/0292001376F6T9DHG583> <http://lei.info/voc/l1/alternativeLanguageEntityName> "SPRINGBOARD TRUST AND INVESTMENT LTD"@fr;
+                                       <http://lei.info/voc/l1/alternativeLanguageHeadquartersAddress> [<http://lei.info/voc/l1/city> "LAGOS"@fr ; 
+                                                                                                        <http://lei.info/voc/l1/country> "NG"@fr ; 
+                                                                                                        <http://lei.info/voc/l1/postalCode> "23401"@fr ; 
+                                                                                                        <http://lei.info/voc/l1/region> "NG-LA"@fr ; 
+                                                                                                        <http://lei.info/voc/l1/streetAddress> "28 OLOGUN AGBAJE STREET"@fr ; 
+                                                                                                        a <http://lei.info/voc/l1/Address>];
+                                       <http://lei.info/voc/l1/entityLegalFormCode> "8888";
+                                       <http://lei.info/voc/l1/headquartersAddress> [<http://lei.info/voc/l1/city> "LAGOS" ; 
+                                                                                     <http://lei.info/voc/l1/country> "NG" ; 
+                                                                                     <http://lei.info/voc/l1/region> "NG-LA" ; 
+                                                                                     <http://lei.info/voc/l1/streetAddress> "28 OLOGUN AGBAJE STREET" ; 
+                                                                                     a <http://lei.info/voc/l1/Address>];
+                                       <http://lei.info/voc/l1/identifiedBy> <http://lei.info/0292001376F6T9DHG583#lei>;
+                                       <http://lei.info/voc/l1/legalAddress> [<http://lei.info/voc/l1/city> "LAGOS" ; 
+                                                                              <http://lei.info/voc/l1/country> "NG" ; 
+                                                                              <http://lei.info/voc/l1/postalCode> "23401" ; 
+                                                                              <http://lei.info/voc/l1/region> "NG-LA" ; 
+                                                                              <http://lei.info/voc/l1/streetAddress> "28 OLOGUN AGBAJE STREET" ; 
+                                                                              a <http://lei.info/voc/l1/Address>];
+                                       <http://lei.info/voc/l1/legalEntityStatus> <http://lei.info/voc/l1/Active>;
+                                       <http://lei.info/voc/l1/legalName> "SPRINGBSPRINGBOARD TRUST AND INVESTMENT LTD"@en;
+                                       <http://lei.info/voc/l1/primaryValidationAuthority> [<http://lei.info/voc/l1/validationAuthorityID> "RA000469" ; 
+                                                                                            a <http://lei.info/voc/l1/ValidationAuthority>];
+                                       <http://lei.info/voc/l1/registrationAuthority> [<http://lei.info/voc/l1/registrationAuthorityEntityID> "RC382989" ; 
+                                                                                       <http://lei.info/voc/l1/registrationAuthorityID> "RA000469" ; 
+                                                                                       a <http://lei.info/voc/l1/RegistrationAuthority>];
+                                       <http://lei.info/voc/l1/validationSource> <http://lei.info/voc/l1/FullyCorroborated>;
+                                       a <http://lei.info/voc/l1/LegalEntity>.
+<http://lei.info/0292001376F6T9DHG583#lei> <http://lei.info/voc/l1/identifies> <http://lei.info/0292001376F6T9DHG583>;
+                                           <http://lei.info/voc/l1/initialRegistrationDate> "2016-06-21T12:30:00.000Z"^^xsd:dateTime;
+                                           <http://lei.info/voc/l1/lastUpdateDate> "2018-06-22T11:44:56.000Z"^^xsd:dateTime;
+                                           <http://lei.info/voc/l1/leiCode> "0292001376F6T9DHG583";
+                                           <http://lei.info/voc/l1/managingLOU> <http://lei.info/029200067A7K6CH0H586>;
+                                           <http://lei.info/voc/l1/nextRenewalDate> "2019-06-21T11:30:00.000Z"^^xsd:dateTime;
+                                           <http://lei.info/voc/l1/registrationStatus> <http://lei.info/voc/l1/Issued>;
+                                           a <http://lei.info/voc/l1/LegalEntityIdentifier>.
