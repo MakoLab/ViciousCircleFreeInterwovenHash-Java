@@ -1,0 +1,9 @@
+@prefix ihs: <http://makolab.com/voc/IHSMarkit/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+
+<http://lei.info/ihs/A4sBfQ> a ihs:AccountHolder ;
+	rdfs:label "Abersenny Ltd"^^xsd:string ;
+	ihs:classification "Private company"^^xsd:string ;
+	ihs:country "United Kingdom"^^xsd:string ;
+	ihs:website "http://abersenny.com/"^^xsd:anyURI .

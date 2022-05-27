@@ -1,5 +1,6 @@
 package com.makolab.rdf4jreader;
 
+import com.makolab.cryptography.HashCalculator;
 import com.makolab.graphelements.*;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
@@ -41,5 +42,22 @@ public class Rdf4jReader {
             }
         }
         return graph;
+    }
+
+    public static byte[] calculateHash(Model g)
+    {
+        return readGraph(g).calculateHash();
+    }
+
+    public static byte[] calculateHash(Model g, HashCalculator hashCalculator)
+    {
+        if (hashCalculator == null)
+        {
+            return readGraph(g).calculateHash();
+        }
+        else
+        {
+            return readGraph(g).calculateHash(hashCalculator);
+        }
     }
 }

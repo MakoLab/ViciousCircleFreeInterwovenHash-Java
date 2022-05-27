@@ -195,7 +195,7 @@ public class Graph {
             if (result.containsKey(parent.get(p))) {
                 result.get(parent.get(p)).add(p);
             } else {
-                result.put(parent.get(p), Arrays.asList(p));
+                result.put(parent.get(p), new ArrayList<>(Arrays.asList(p)));
             }
         }
 
